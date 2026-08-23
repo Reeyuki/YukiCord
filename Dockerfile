@@ -1,5 +1,5 @@
 # --- Backend Build Stage ---
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build
 WORKDIR /source
 COPY server/YukiCord/*.csproj ./server/YukiCord/
 RUN dotnet restore ./server/YukiCord/YukiCord.csproj --runtime linux-musl-x64
@@ -8,7 +8,7 @@ WORKDIR /source/server/YukiCord
 RUN dotnet publish -c Release --runtime linux-musl-x64 -o /source/published /p:PublishSingleFile=false /p:CopyLocalLockFileAssemblies=true
 
 # --- Runtime Stage ---
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 RUN apk add --no-cache \
     libgcc libstdc++ fontconfig freetype harfbuzz \
