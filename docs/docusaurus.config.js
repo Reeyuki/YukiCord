@@ -3,15 +3,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'LiventCord Docs',
+  title: 'YukiCord Docs',
   tagline: 'Dinosaurs are cool',
-  url: 'https://liventcord.github.io',
-  baseUrl: '/LiventCord/', 
+  url: 'https://yukicord.github.io',
+  baseUrl: '/YukiCord/', 
   onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'liventcord',
-  projectName: 'LiventCord',
+  organizationName: 'yukicord',
+  projectName: 'YukiCord',
 
   trailingSlash: false,
   presets: [
@@ -21,7 +21,7 @@ module.exports = {
         docs: {
           routeBasePath: '/', 
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/LiventCord/liventcord/edit/main/docs',
+          editUrl: 'https://github.com/YukiCord/yukicord/edit/main/docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -32,9 +32,9 @@ module.exports = {
 
   themeConfig: {
     navbar: {
-      title: 'LiventCord',
+      title: 'YukiCord',
       logo: {
-        alt: 'LiventCord Logo',
+        alt: 'YukiCord Logo',
         src: 'img/logo.svg',
       },
       items: [
@@ -45,7 +45,7 @@ module.exports = {
           label: 'Tutorial',
         },
         {
-          to: 'https://liventcord.github.io/LiventCord/app',
+          to: 'https://yukicord.github.io/YukiCord/app',
           label: 'App',
           position: 'left',
         },
@@ -68,12 +68,12 @@ module.exports = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/liventcord/',
+              href: 'https://github.com/yukicord/',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} LiventCord Project. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} YukiCord Project. Built with Docusaurus.`,
     },
     prism: {
       theme: lightCodeTheme,

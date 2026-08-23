@@ -69,7 +69,7 @@ jobs:
           echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Build & prepare backend
-        working-directory: server/LiventCord
+        working-directory: server/YukiCord
         run: |
           export PATH=$HOME/.dotnet:$PATH
           export PATH=$HOME/.dotnet/tools:$PATH
@@ -108,4 +108,4 @@ jobs:
 
       - name: Show backend logs on failure
         if: failure()
-        run: cat server/LiventCord/Logs/* || echo "No logs found"
+        run: cat server/YukiCord/Logs/* || echo "No logs found"

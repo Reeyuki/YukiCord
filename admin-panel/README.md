@@ -1,6 +1,6 @@
 # **Admin Panel**
 
-This panel is used for monitoring **LiventCord** services.
+This panel is used for monitoring **YukiCord** services.
 
 ---
 

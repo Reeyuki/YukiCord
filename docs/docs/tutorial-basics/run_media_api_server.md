@@ -3,7 +3,7 @@
 Open a terminal and run:
 
 ```bash
-cd liventcord/server/media-api
+cd yukicord/server/media-api
 cp env.example .env
 go run .
 ```

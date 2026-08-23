@@ -59,7 +59,7 @@ Minimum number of connections in the database pool.
 
 - **SqlitePath**:
   File path where SQLite will store data.
-  **Defaults to** `Data/liventcord.db`
+  **Defaults to** `Data/yukicord.db`
 - **JwtAccessTokenExpiryDays**:
   Expire days for jwt tokens
   **Defaults to** `7`
@@ -129,7 +129,7 @@ Minimum number of connections in the database pool.
 ## Go WS Server Configuration
 
 ```bash
-cd liventcord/server/ws-api
+cd yukicord/server/ws-api
 ```
 
 1. Move `.example.env` to `.env`.
@@ -171,7 +171,7 @@ mv .example.env .env
 ## Go Media Proxy Server Configuration
 
 ```bash
-cd liventcord/server/media-api
+cd yukicord/server/media-api
 ```
 
 1. Move `.env.example` to `.env`.

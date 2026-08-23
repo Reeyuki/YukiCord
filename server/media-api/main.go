@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync/atomic"
 
-	"github.com/liventcord/server/telemetry"
+	"github.com/yukicord/server/telemetry"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -35,7 +35,7 @@ func main() {
 	r.Use(cors())
 
 	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "LiventCord media api is working.")
+		c.String(http.StatusOK, "YukiCord media api is working.")
 	})
 
 	initializeProxy(r, adminPassword)

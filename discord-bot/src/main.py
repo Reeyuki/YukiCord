@@ -3,7 +3,7 @@ from discord.ext import commands
 
 from avatar import AvatarHandler
 from commands.commands import handle_commands, isDm
-from messages.message_forwarder import LiventCordClient
+from messages.message_forwarder import YukiCordClient
 from messages.message_handler_db import MessageHandler
 from utils import (
     DC_TOKEN,
@@ -117,7 +117,7 @@ async def on_message(message: discord.Message) -> None:
 
     await handle_commands(client, message)
     if is_text_channel(message.channel):
-        lc_client = LiventCordClient(forward_url, LC_BOT_TOKEN)
+        lc_client = YukiCordClient(forward_url, LC_BOT_TOKEN)
         await lc_client.forward_messages(message)
 
 

@@ -5,11 +5,11 @@ sidebar_position: 1
 
 # Tutorial Intro
 
-Get started with LiventCord in just a few steps.
+Get started with YukiCord in just a few steps.
 
 ## 🚀 Quick Start
 
-**Jump in now:** **[liventcord.github.io](https://liventcord.github.io)**.
+**Jump in now:** **[yukicord.github.io](https://yukicord.github.io)**.
 
 ### Or:
 
@@ -30,13 +30,13 @@ Get started with LiventCord in just a few steps.
 ### Clone the repository:
 
 ```bash
-git clone https://github.com/liventcord/liventcord && cd liventcord
+git clone https://github.com/yukicord/yukicord && cd yukicord
 ```
 
 ### Run the Server (API)
 
 ```bash
-cd server/LiventCord
+cd server/YukiCord
 ```
 
 Create database

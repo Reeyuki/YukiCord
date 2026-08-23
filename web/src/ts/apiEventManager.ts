@@ -237,7 +237,6 @@ apiClient.on(EventType.GET_INVITES_CREATE, (data) => {
   } else {
     console.warn("Invite ids do not exist. ", data);
   }
-
 });
 apiClient.on(EventType.UPDATE_GUILD_NAME, (data: UpdateGuildNameResponse) => {
   handleUpdateGuildName(data);

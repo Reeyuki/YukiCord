@@ -2,25 +2,25 @@ import asyncio
 import json
 from typing import Any
 
-from livent_cord_client import AuthenticatedClient
-from livent_cord_client.api.channel import post_api_discord_bot_guilds_guild_id_channels
-from livent_cord_client.api.message import (
+from yuki_cord_client import AuthenticatedClient
+from yuki_cord_client.api.channel import post_api_discord_bot_guilds_guild_id_channels
+from yuki_cord_client.api.message import (
     post_api_discord_bot_messages_bulk_guild_id_channel_id,
 )
-from livent_cord_client.models.create_channel_request_bot import CreateChannelRequestBot
-from livent_cord_client.models.embed import Embed
-from livent_cord_client.models.embed_author import EmbedAuthor
-from livent_cord_client.models.embed_field import EmbedField
-from livent_cord_client.models.embed_footer import EmbedFooter
-from livent_cord_client.models.embed_image import EmbedImage
-from livent_cord_client.models.embed_thumbnail import EmbedThumbnail
-from livent_cord_client.models.embed_type import EmbedType
-from livent_cord_client.models.embed_video import EmbedVideo
-from livent_cord_client.models.new_bot_message_request import NewBotMessageRequest
-from livent_cord_client.types import UNSET, Unset
+from yuki_cord_client.models.create_channel_request_bot import CreateChannelRequestBot
+from yuki_cord_client.models.embed import Embed
+from yuki_cord_client.models.embed_author import EmbedAuthor
+from yuki_cord_client.models.embed_field import EmbedField
+from yuki_cord_client.models.embed_footer import EmbedFooter
+from yuki_cord_client.models.embed_image import EmbedImage
+from yuki_cord_client.models.embed_thumbnail import EmbedThumbnail
+from yuki_cord_client.models.embed_type import EmbedType
+from yuki_cord_client.models.embed_video import EmbedVideo
+from yuki_cord_client.models.new_bot_message_request import NewBotMessageRequest
+from yuki_cord_client.types import UNSET, Unset
 
 from messages.message import Message
-from utils import LC_BOT_TOKEN, MainGuildIdLiventcord, forward_url
+from utils import LC_BOT_TOKEN, MainGuildIdYukicord, forward_url
 
 embed_type_mapping = {
     "article": EmbedType.VALUE_0,
@@ -33,7 +33,7 @@ embed_type_mapping = {
 }
 
 
-class LiventCordClient:
+class YukiCordClient:
     def __init__(self, url: str, token: str):
         self.client = AuthenticatedClient(base_url=url, token=token)
         self.created_channels: set[str] = set()
@@ -151,11 +151,11 @@ class LiventCordClient:
                 )
                 try:
                     response = await post_api_discord_bot_guilds_guild_id_channels.asyncio_detailed(
-                        guild_id=MainGuildIdLiventcord, client=client, body=body
+                        guild_id=MainGuildIdYukicord, client=client, body=body
                     )
                     print(response.content)
                     if response.status_code == 404:
-                        print(f"Guild {MainGuildIdLiventcord} does not exist")
+                        print(f"Guild {MainGuildIdYukicord} does not exist")
                         exit()
                     self.created_channels.add(channel_id)
                 except Exception as e:
@@ -192,7 +192,7 @@ class LiventCordClient:
                 requests.append(request)
 
             response = await post_api_discord_bot_messages_bulk_guild_id_channel_id.asyncio_detailed(
-                guild_id=MainGuildIdLiventcord,
+                guild_id=MainGuildIdYukicord,
                 channel_id=str(messages[0].channel_id),
                 client=client,
                 body=requests,
@@ -204,7 +204,7 @@ class LiventCordClient:
 async def main() -> None:
     from messages.message_handler_db import MessageHandler
 
-    lc_client = LiventCordClient(forward_url, LC_BOT_TOKEN)
+    lc_client = YukiCordClient(forward_url, LC_BOT_TOKEN)
     messages = MessageHandler.get_messages()
     await lc_client.forward_messages(messages)
 

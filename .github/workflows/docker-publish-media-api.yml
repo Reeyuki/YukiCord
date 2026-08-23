@@ -31,6 +31,6 @@ jobs:
           context: server/
           file: server/media-api/Dockerfile
           push: true
-          tags: thelp281/liventcord-media-api:latest
-          cache-from: type=registry,ref=thelp281/liventcord-media-api:cache
-          cache-to: type=registry,ref=thelp281/liventcord-media-api:cache,mode=max
+          tags: thelp281/yukicord-media-api:latest
+          cache-from: type=registry,ref=thelp281/yukicord-media-api:cache
+          cache-to: type=registry,ref=thelp281/yukicord-media-api:cache,mode=max

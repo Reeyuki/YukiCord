@@ -19,6 +19,6 @@ appsettings.json
 *.pdb
 
 *.env
-LiventCord/FileCache
-LiventCord/Migrations
+YukiCord/FileCache
+YukiCord/Migrations
 appstats.json

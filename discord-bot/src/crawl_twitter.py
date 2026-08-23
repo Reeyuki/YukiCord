@@ -8,13 +8,13 @@ import time
 from typing import Any
 
 import requests
-from livent_cord_client import AuthenticatedClient
-from livent_cord_client.api.message import (
+from yuki_cord_client import AuthenticatedClient
+from yuki_cord_client.api.message import (
     post_api_discord_bot_messages_guild_id_channel_id,
 )
-from livent_cord_client.models.new_bot_message_request import NewBotMessageRequest
+from yuki_cord_client.models.new_bot_message_request import NewBotMessageRequest
 
-from utils import LC_BOT_TOKEN, MainGuildIdLiventcord, forward_url
+from utils import LC_BOT_TOKEN, MainGuildIdYukicord, forward_url
 
 
 def parse_args() -> argparse.Namespace:
@@ -107,7 +107,7 @@ def scrape_images(
 async def send_messages(
     messages: list[str], client: AuthenticatedClient, channel_id: str, user_id: str
 ) -> None:
-    """Send messages to Liventcord guild asynchronously."""
+    """Send messages to Yukicord guild asynchronously."""
     for message in messages:
         data: dict[str, Any] = {
             "message_id": create_random_id(),
@@ -121,7 +121,7 @@ async def send_messages(
 
         try:
             response = await post_api_discord_bot_messages_guild_id_channel_id.asyncio_detailed(
-                guild_id=MainGuildIdLiventcord,
+                guild_id=MainGuildIdYukicord,
                 channel_id=channel_id,
                 client=client,
                 body=request,

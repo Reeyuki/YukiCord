@@ -1,12 +1,12 @@
-![App](https://raw.githubusercontent.com/liventcord/.github/refs/heads/main/afab7995-f75d-4d84-9a3c-da44755f744d-1771621784.png)
-![Profile](https://raw.githubusercontent.com/liventcord/.github/refs/heads/main/0137a61a-713c-40f1-9c77-48e88e545df3-1771621697.png)
-![Media](https://raw.githubusercontent.com/liventcord/.github/refs/heads/main/206a2aa6-78d0-47b1-ab35-eebbee0d8e35-1771621712.png)
-![Friends](https://raw.githubusercontent.com/liventcord/.github/refs/heads/main/2025-12-21-015202_hyprshot.png)
-![Settings](https://raw.githubusercontent.com/liventcord/.github/refs/heads/main/2025-12-21-015659_hyprshot.png)
+![App](https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/afab7995-f75d-4d84-9a3c-da44755f744d-1771621784.png)
+![Profile](https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/0137a61a-713c-40f1-9c77-48e88e545df3-1771621697.png)
+![Media](https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/206a2aa6-78d0-47b1-ab35-eebbee0d8e35-1771621712.png)
+![Friends](https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/2025-12-21-015202_hyprshot.png)
+![Settings](https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/2025-12-21-015659_hyprshot.png)
 
 ## 🚀 Quick Start
 
-**Jump in now:** **[liventcord.github.io](https://liventcord.github.io)**.
+**Jump in now:** **[yukicord.github.io](https://yukicord.github.io)**.
 
 ### Or:
 
@@ -27,13 +27,13 @@
 ### Clone the repository:
 
 ```bash
-git clone https://github.com/liventcord/liventcord && cd liventcord
+git clone https://github.com/yukicord/yukicord && cd yukicord
 ```
 
 ### Run the Server (API)
 
 ```bash
-cd server/LiventCord
+cd server/YukiCord
 ```
 
 Create database
@@ -92,20 +92,20 @@ docker-compose up --build
 Run directly with Docker
 
 ```bash
-docker run -p 5005:5005 -v appsettings.json thelp281/liventcord:latest
+docker run -p 5005:5005 -v appsettings.json thelp281/yukicord:latest
 ```
 
 ## Website
 
-https://liventcord.github.io
+https://yukicord.github.io
 
 ## Docs
 
-https://liventcord.github.io/LiventCord
+https://yukicord.github.io/YukiCord
 
 ## Project Overview
 
-👉 **Repository:** https://github.com/liventcord
+👉 **Repository:** https://github.com/yukicord
 
 ### Contributing
 

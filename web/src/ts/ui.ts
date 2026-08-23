@@ -99,7 +99,7 @@ export function clickMainLogo(logo: HTMLElement): void {
   if (logoClicked >= 14) {
     logoClicked = 0;
     try {
-      new Audio("/liventocordolowpitch.mp3").play();
+      new Audio("/yukicordolowpitch.mp3").play();
     } catch (e) {
       console.log(e);
     }

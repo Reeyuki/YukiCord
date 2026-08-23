@@ -13,7 +13,7 @@ async function streamAudio(
 
   const servers = env.MEDIA_API_SERVERS.split(",");
   const range = req.headers.get("Range");
-  const cacheKey = new Request(`https://audio-cache.liventcord/${type}/${id}`);
+  const cacheKey = new Request(`https://audio-cache.yukicord/${type}/${id}`);
 
   const cache = (caches as any).default;
 

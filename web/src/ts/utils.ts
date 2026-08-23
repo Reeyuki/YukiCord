@@ -11,15 +11,14 @@ import { initialState } from "./app.ts";
 import { Attachment } from "./types/interfaces.ts";
 
 export const IMAGE_SRCS = {
-  ICON_SRC:
-    "https://liventcord.github.io/LiventCord/app/images/icons/icon.webp",
+  ICON_SRC: "https://yukicord.github.io/YukiCord/app/images/icons/icon.webp",
   ICON_ACTIVE_SRC:
-    "https://liventcord.github.io/LiventCord/app/images/icons/iconactive.webp",
+    "https://yukicord.github.io/YukiCord/app/images/icons/iconactive.webp",
   DEFAULT_MEDIA_IMG_SRC:
-    "https://liventcord.github.io/LiventCord/app/images/defaultmediaimage.webp",
-  CLYDE_SRC: "https://liventcord.github.io/LiventCord/app/images/clyde.webp",
+    "https://yukicord.github.io/YukiCord/app/images/defaultmediaimage.webp",
+  CLYDE_SRC: "https://yukicord.github.io/YukiCord/app/images/clyde.webp",
   DEFAULT_PROFILE_IMG_SRC:
-    "https://liventcord.github.io/LiventCord/app/images/guest.webp"
+    "https://yukicord.github.io/YukiCord/app/images/guest.webp"
 };
 
 export function $<T extends HTMLElement = HTMLElement>(
@@ -180,9 +179,7 @@ export function reCalculateFriTitle() {
 }
 
 export function setWindowName(pendingCounter: number) {
-  document.title = pendingCounter
-    ? `LiventCord (${pendingCounter})`
-    : "LiventCord";
+  document.title = pendingCounter ? `YukiCord (${pendingCounter})` : "YukiCord";
 }
 function sendNotify(data: string) {
   const container = createEl("div", { className: "notify-info-container" });
@@ -1277,18 +1274,18 @@ export function createBlackStream(fps = 1): MediaStream {
   return canvas.captureStream(fps);
 }
 
-export const pollForElement = (id:string, interval = 100, timeout = 5000) => {
-    return new Promise((resolve) => {
-      const start = Date.now();
-      const timer = setInterval(() => {
-        const el = getId(id);
-        if (el) {
-          clearInterval(timer);
-          resolve(el);
-        } else if (Date.now() - start >= timeout) {
-          clearInterval(timer);
-          resolve(null);
-        }
-      }, interval);
-    });
-  };
+export const pollForElement = (id: string, interval = 100, timeout = 5000) => {
+  return new Promise((resolve) => {
+    const start = Date.now();
+    const timer = setInterval(() => {
+      const el = getId(id);
+      if (el) {
+        clearInterval(timer);
+        resolve(el);
+      } else if (Date.now() - start >= timeout) {
+        clearInterval(timer);
+        resolve(null);
+      }
+    }, interval);
+  });
+};

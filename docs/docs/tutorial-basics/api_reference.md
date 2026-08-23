@@ -6,4 +6,4 @@ Access the Swagger REST API UI at:
 
 ## Live server:
 
-https://liventcord.koyeb.app/docs
+https://yukicord.koyeb.app/docs

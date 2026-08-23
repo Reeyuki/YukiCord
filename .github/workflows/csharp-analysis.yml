@@ -4,8 +4,8 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - "server/LiventCord/**"
-      - "!server/LiventCord/wwwroot/**"
+      - "server/YukiCord/**"
+      - "!server/YukiCord/wwwroot/**"
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -19,13 +19,13 @@ jobs:
       server_changed: ${{ steps.filter.outputs.server }}
     steps:
       - uses: actions/checkout@v4
-      - name: Detect changes in server/LiventCord
+      - name: Detect changes in server/YukiCord
         id: filter
         uses: dorny/paths-filter@v2
         with:
           filters: |
             server:
-              - 'server/LiventCord/**'
+              - 'server/YukiCord/**'
 
   analyze:
     name: Analyze C# Code

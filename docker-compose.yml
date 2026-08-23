@@ -1,11 +1,11 @@
 services:
   app:
-    image: thelp281/liventcord:latest
+    image: thelp281/yukicord:latest
     ports:
       - "5005:5005"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - AppSettings__SqlitePath=/app/data/liventcord.db
+      - AppSettings__SqlitePath=/app/data/yukicord.db
       - AppSettings__SqliteCachePath=/app/data/cache.db
       - AppSettings__FrontendUrl=http://localhost
       - AppSettings__RedisConnectionString=redis://redis:6379
@@ -19,7 +19,7 @@ services:
       - "localhost:host-gateway"
 
   ws-api:
-    image: thelp281/liventcord-ws-api:latest
+    image: thelp281/yukicord-ws-api:latest
     ports:
       - "8080:8080"
     networks:
@@ -32,7 +32,7 @@ services:
       - "localhost:host-gateway"
 
   media-api:
-    image: thelp281/liventcord-media-api:latest
+    image: thelp281/yukicord-media-api:latest
     ports:
       - "5000:5000"
     environment:

@@ -289,7 +289,7 @@ let builtinEmojiPayload: BuiltinEmojiPayload | null = null;
 async function loadBuiltinEmojis(): Promise<void> {
   try {
     const response = await fetch(
-      "https://raw.githubusercontent.com/liventcord/LiventCord/refs/heads/main/web/public/emojis.json"
+      "https://raw.githubusercontent.com/yukicord/YukiCord/refs/heads/main/web/public/emojis.json"
     );
     if (!response.ok) {
       builtinEmojisCache = [];

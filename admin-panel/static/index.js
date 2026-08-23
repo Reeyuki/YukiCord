@@ -57,14 +57,14 @@ function formatUptime(uptime) {
 
 function generateFilesServed(data) {
   const isProxy = data.service.toLowerCase().includes("proxy");
-  const isLiventCord = data.service === "LiventCord";
+  const isYukiCord = data.service === "YukiCord";
 
   let res =
-    isProxy || isLiventCord
+    isProxy || isYukiCord
       ? `<p class="text-slate-300"><span class="font-semibold text-white">Files Served:</span> <span data-field="filesServed">${data.servedFilesSinceStartup ?? "0"}</span></p>`
       : `<p class="text-slate-300"><span class="font-semibold text-white">Users Connected:</span> <span data-field="usersCount">${data.usersCount ?? "0"}</span></p>`;
 
-  if (isLiventCord) {
+  if (isYukiCord) {
     res += `<p class="text-slate-300"><span class="font-semibold text-white">Total Requests:</span> <span data-field="totalRequests">${data.totalRequestsServed ?? "0"}</span></p>`;
   }
 
@@ -87,7 +87,7 @@ function renderServiceInfo(data) {
 function renderSystemInfo(data, uniqueId) {
   const memPercent = Math.round(data.memory?.system?.usedPercent || 0);
   const cpuPercent = Math.round(data.cpuUsagePercent || 0);
-  const isLiventCord = data.service === "LiventCord";
+  const isYukiCord = data.service === "YukiCord";
   const gcCount = data.memory?.numGc ?? data.memory?.num_gc ?? 0;
 
   return `
@@ -104,9 +104,9 @@ function renderSystemInfo(data, uniqueId) {
       </div>
       <div class="grid grid-cols-2 gap-3 text-sm">
         <p class="text-slate-300"><span class="font-semibold text-white">OS:</span> <span data-field="os">${data.memory?.os ?? "N/A"}</span></p>
-        ${isLiventCord ? `<p class="text-slate-300"><span class="font-semibold text-white">CPU Cores:</span> <span data-field="cpuCores">${data.cpuCores ?? "N/A"}</span></p>` : `<p class="text-slate-300"><span class="font-semibold text-white">Sys:</span> <span data-field="goSys">${data.memory?.go_sys ?? "N/A"}</span></p>`}
+        ${isYukiCord ? `<p class="text-slate-300"><span class="font-semibold text-white">CPU Cores:</span> <span data-field="cpuCores">${data.cpuCores ?? "N/A"}</span></p>` : `<p class="text-slate-300"><span class="font-semibold text-white">Sys:</span> <span data-field="goSys">${data.memory?.go_sys ?? "N/A"}</span></p>`}
         <p class="text-slate-300"><span class="font-semibold text-white">GC Count:</span> <span data-field="gcCount">${gcCount}</span></p>
-        ${isLiventCord ? `<p class="text-slate-300"><span class="font-semibold text-white">DB Size:</span> <span data-field="dbSize">${data.usedDbSize ?? "N/A"}</span> GB</p>` : `<p class="text-slate-300"><span class="font-semibold text-white">Routines:</span> <span data-field="goroutines">${data.goroutines ?? "N/A"}</span></p>`}
+        ${isYukiCord ? `<p class="text-slate-300"><span class="font-semibold text-white">DB Size:</span> <span data-field="dbSize">${data.usedDbSize ?? "N/A"}</span> GB</p>` : `<p class="text-slate-300"><span class="font-semibold text-white">Routines:</span> <span data-field="goroutines">${data.goroutines ?? "N/A"}</span></p>`}
         <p class="col-span-2 text-slate-300"><span class="font-semibold text-white">Memory:</span> <span data-field="memoryUsed">${data.memory?.system?.used ?? "N/A"}</span> / <span data-field="memoryTotal">${data.memory?.system?.total ?? "N/A"}</span></p>
       </div>
     </div>
@@ -114,7 +114,7 @@ function renderSystemInfo(data, uniqueId) {
 }
 
 function renderStorageInfo(data, uniqueId) {
-  const isLiventCord = data.service === "LiventCord";
+  const isYukiCord = data.service === "YukiCord";
   const dbUsed = data.usedDbSize ?? 0;
   const dbLimit = 5;
   const dbPercent = Math.round((dbUsed / dbLimit) * 100);
@@ -133,15 +133,15 @@ function renderStorageInfo(data, uniqueId) {
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
         </svg>
-        ${isLiventCord ? "Database" : "Storage"}
+        ${isYukiCord ? "Database" : "Storage"}
       </h3>
       <div class="flex justify-center mb-5">
-        ${isLiventCord ? createBubble(dbPercent, "DB Size", `${uniqueId}-db`) : createBubble(storageUsed, "Storage", `${uniqueId}-storage`)}
+        ${isYukiCord ? createBubble(dbPercent, "DB Size", `${uniqueId}-db`) : createBubble(storageUsed, "Storage", `${uniqueId}-storage`)}
       </div>
       <div class="grid grid-cols-2 gap-3 text-sm">
-        ${isLiventCord ? `<p class="text-slate-300"><span class="font-semibold text-white">Limit:</span> <span data-field="dbLimit">${dbLimit} GB</span></p>` : `<p class="text-slate-300"><span class="font-semibold text-white">Limit:</span> <span data-field="storageLimit">${data.storageStatus?.storageLimitGB ?? "N/A"} GB</span></p>`}
-        ${isLiventCord ? `<p class="text-slate-300"><span class="font-semibold text-white">Used:</span> <span data-field="dbUsed">${dbUsed}</span> GB</p>` : `<p class="text-slate-300"><span class="font-semibold text-white">Used:</span> <span data-field="storageUsed">${data.storageStatus?.folderSizeGB?.toFixed(2) ?? "N/A"}</span> GB</p>`}
-        ${!isLiventCord ? `<p class="text-slate-300"><span class="font-semibold text-white">Limit Reached:</span> <span data-field="limitReached">${limitReached}</span></p>` : ""}
+        ${isYukiCord ? `<p class="text-slate-300"><span class="font-semibold text-white">Limit:</span> <span data-field="dbLimit">${dbLimit} GB</span></p>` : `<p class="text-slate-300"><span class="font-semibold text-white">Limit:</span> <span data-field="storageLimit">${data.storageStatus?.storageLimitGB ?? "N/A"} GB</span></p>`}
+        ${isYukiCord ? `<p class="text-slate-300"><span class="font-semibold text-white">Used:</span> <span data-field="dbUsed">${dbUsed}</span> GB</p>` : `<p class="text-slate-300"><span class="font-semibold text-white">Used:</span> <span data-field="storageUsed">${data.storageStatus?.folderSizeGB?.toFixed(2) ?? "N/A"}</span> GB</p>`}
+        ${!isYukiCord ? `<p class="text-slate-300"><span class="font-semibold text-white">Limit Reached:</span> <span data-field="limitReached">${limitReached}</span></p>` : ""}
       </div>
     </div>
   `;
@@ -250,7 +250,7 @@ function updateServicePanel(normalized, uniqueId) {
   updateBubble(`${uniqueId}-cpu`, cpuPercent);
   updateBubble(`${uniqueId}-mem`, memPercent);
 
-  if (normalized.service === "LiventCord") {
+  if (normalized.service === "YukiCord") {
     const dbPercent = Math.round(((normalized.usedDbSize ?? 0) / 5) * 100);
     updateBubble(`${uniqueId}-db`, dbPercent);
   } else if (normalized.storageStatus) {

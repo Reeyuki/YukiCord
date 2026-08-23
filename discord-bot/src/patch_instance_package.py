@@ -25,4 +25,4 @@ def patch_isinstance_issues(base_dir: Path) -> None:
             print(f"➖ No change: {path}")
 
 
-patch_isinstance_issues(Path("livent-cord-client"))
+patch_isinstance_issues(Path("yuki-cord-client"))

@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Docker Quick Start
 
-Run **LiventCord** using Docker.
+Run **YukiCord** using Docker.
 
 ## Prerequisites
 
@@ -28,19 +28,19 @@ docker compose -f dev-docker-compose.yml up
 #### Docker
 
 ```bash
-docker run -p 5005:5005 thelp281/liventcord:latest
+docker run -p 5005:5005 thelp281/yukicord:latest
 ```
 
 #### Docker with json config
 
 ```bash
-docker run -p 5005:5005 -v appsettings.json thelp281/liventcord:latest
+docker run -p 5005:5005 -v appsettings.json thelp281/yukicord:latest
 ```
 
 #### Pass arguments
 
 ```bash
-docker run -p 5005:5005 -e "APPSETTINGS__PORT=6000" -e "APPSETTINGS__DATABASETYPE=mysql" thelp281/liventcord:latest
+docker run -p 5005:5005 -e "APPSETTINGS__PORT=6000" -e "APPSETTINGS__DATABASETYPE=mysql" thelp281/yukicord:latest
 ```
 
 Your container is now running at `http://localhost:5005`.
@@ -50,7 +50,7 @@ Your container is now running at `http://localhost:5005`.
 #### Docker
 
 ```bash
-docker run -p 8080:8080 thelp281/liventcord-ws-api:latest
+docker run -p 8080:8080 thelp281/yukicord-ws-api:latest
 ```
 
 Your container is now running at `http://localhost:8080`.
@@ -58,7 +58,7 @@ Your container is now running at `http://localhost:8080`.
 #### Pass arguments
 
 ```bash
-docker run -p 8080:8080 -e "DotnetApiUrl=http://localhost:5005" -e "AdminPassword=admin" thelp281/liventcord-ws-api:latest
+docker run -p 8080:8080 -e "DotnetApiUrl=http://localhost:5005" -e "AdminPassword=admin" thelp281/yukicord-ws-api:latest
 ```
 
 ### Run Go Media Api On Docker
@@ -66,13 +66,13 @@ docker run -p 8080:8080 -e "DotnetApiUrl=http://localhost:5005" -e "AdminPasswor
 #### Docker
 
 ```bash
-docker run -p 5000:5000 thelp281/liventcord-media-api:latest
+docker run -p 5000:5000 thelp281/yukicord-media-api:latest
 ```
 
 #### Pass arguments
 
 ```bash
-docker run -p 8080:8080 -e "MainServerUrl=http://localhost:5005" -e "AdminPassword=admin" thelp281/liventcord-media-api:latest
+docker run -p 8080:8080 -e "MainServerUrl=http://localhost:5005" -e "AdminPassword=admin" thelp281/yukicord-media-api:latest
 ```
 
 Your container is now running at `http://localhost:5000`.

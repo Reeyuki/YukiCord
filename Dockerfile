@@ -1,10 +1,10 @@
 # --- Backend Build Stage ---
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 WORKDIR /source
-COPY server/LiventCord/*.csproj ./server/LiventCord/
-RUN dotnet restore ./server/LiventCord/LiventCord.csproj --runtime linux-musl-x64
-COPY server/LiventCord/ ./server/LiventCord/
-WORKDIR /source/server/LiventCord
+COPY server/YukiCord/*.csproj ./server/YukiCord/
+RUN dotnet restore ./server/YukiCord/YukiCord.csproj --runtime linux-musl-x64
+COPY server/YukiCord/ ./server/YukiCord/
+WORKDIR /source/server/YukiCord
 RUN dotnet publish -c Release --runtime linux-musl-x64 -o /source/published /p:PublishSingleFile=false /p:CopyLocalLockFileAssemblies=true
 
 # --- Runtime Stage ---
@@ -20,7 +20,7 @@ COPY --from=build /source/published/ /app/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ENV AppSettings__SqlitePath=/app/data/liventcord.db \
+ENV AppSettings__SqlitePath=/app/data/yukicord.db \
     AppSettings__SqliteCachePath=/app/data/cache.db \
     AppSettings__Host=0.0.0.0 \
     AppSettings__Port=5005 \

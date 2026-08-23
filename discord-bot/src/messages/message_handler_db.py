@@ -10,7 +10,7 @@ from sqlalchemy.future import select
 from sqlalchemy.orm.attributes import flag_modified
 
 from messages.message import Message, SessionLocal
-from messages.message_forwarder import LiventCordClient
+from messages.message_forwarder import YukiCordClient
 from utils import (
     BULK_SAVE_THRESHOLD,
     SAVE_LIMIT_PER_CHANNEL,
@@ -288,7 +288,7 @@ class MessageHandler:
 
         handler = cls(message)
         data = handler.extract_message_data_from_discord()
-        message_forwarder = LiventCordClient(url, token)
+        message_forwarder = YukiCordClient(url, token)
 
         try:
             await message_forwarder.forward_messages(data)

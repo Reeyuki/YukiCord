@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
   return {
     root: "./src",
     publicDir: "../public",
-    base: isDev ? "/" : "/LiventCord/app/",
+    base: isDev ? "/" : "/YukiCord/app/",
     envDir: path.resolve(__dirname),
     plugins: [vue(), eslint({ emitWarning: false })],
     css: {

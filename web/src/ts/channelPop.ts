@@ -281,8 +281,7 @@ export function createInviteUsersPop() {
     id: "invite-users-send-input",
     readonly: true
   });
-  if(invitelink !== "")
-  inviteUsersSendInput.value = invitelink
+  if (invitelink !== "") inviteUsersSendInput.value = invitelink;
 
   const copyButton = createEl("button", {
     className: "copy-button",

@@ -9,7 +9,7 @@ env = Env()
 env.read_env()
 
 MainGuildIdDiscord = str(env.int("MAIN_GUILD_ID_DC"))
-MainGuildIdLiventcord = str(env.int("MAIN_GUILD_ID_LC"))
+MainGuildIdYukicord = str(env.int("MAIN_GUILD_ID_LC"))
 OwnerId = int(env.int("OWNER_ID"))
 LC_BOT_TOKEN = env.str("LC_BOT_TOKEN")
 BULK_SAVE_THRESHOLD = env.int("BULK_SAVE_THRESHOLD")

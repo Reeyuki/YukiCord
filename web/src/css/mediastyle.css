@@ -124,7 +124,7 @@
 }
 
 .emoji {
-  background-image: url("https://liventcord.github.io/LiventCord/app/images/emojis.webp");
+  background-image: url("https://yukicord.github.io/YukiCord/app/images/emojis.webp");
   background-size: 1680px 1560px;
   width: 40px;
   height: 40px;
@@ -396,7 +396,7 @@ body.black-theme #media-menu-search-bar {
   bottom: 0px;
   width: 48px;
   height: 48px;
-  background-image: url("https://liventcord.github.io/LiventCord/app/images/preview-emojis.webp");
+  background-image: url("https://yukicord.github.io/YukiCord/app/images/preview-emojis.webp");
   background-size: 960px 192px;
   margin: 2px;
   border-radius: 50%;

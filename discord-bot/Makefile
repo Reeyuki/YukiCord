@@ -2,7 +2,7 @@
 
 SHELL := /bin/bash
 VENV_ACTIVATE = venv/bin/activate
-API_URL = https://liventcord.koyeb.app
+API_URL = https://yukicord.koyeb.app
 PYTHON = python
 
 ifeq ($(OS),Windows_NT)
@@ -23,8 +23,8 @@ format:
 generate-python-client:
 	. $(VENV_ACTIVATE) && cd src && openapi-python-client generate --url $(API_URL)/swagger/v1/swagger.json --overwrite
 	. $(VENV_ACTIVATE) && $(PYTHON) src/patch_instance_package.py
-	. $(VENV_ACTIVATE) && pip uninstall livent-cord-client -y
-	. $(VENV_ACTIVATE) && pip install src/livent-cord-client
+	. $(VENV_ACTIVATE) && pip uninstall yuki-cord-client -y
+	. $(VENV_ACTIVATE) && pip install src/yuki-cord-client
 
 setup:
 	$(PYTHON) -m venv venv

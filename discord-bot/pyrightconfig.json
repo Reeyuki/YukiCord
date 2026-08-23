@@ -3,7 +3,7 @@
       "src/bot.py"
     ],
     "include": [
-      "src/livent-cord-client"
+      "src/yuki-cord-client"
     ],
   }
   

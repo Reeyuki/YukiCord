@@ -7,7 +7,7 @@ services:
       - "5005:5005"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - AppSettings__SqlitePath=/app/data/liventcord.db
+      - AppSettings__SqlitePath=/app/data/yukicord.db
       - AppSettings__SqliteCachePath=/app/data/cache.db
       - AppSettings__FrontendUrl=http://localhost
       - AppSettings__RedisConnectionString=redis://redis:6379

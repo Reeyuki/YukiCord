@@ -52,7 +52,7 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
     const cache = (caches as any).default;
-    const originBase = env.LIVENTCORD_SERVER_URL;
+    const originBase = env.YUKICORD_SERVER_URL;
 
     if (path.match(/^\/attachments\/[a-zA-Z0-9_-]+\/preview$/))
       return handlePreview(request, env);
@@ -61,7 +61,7 @@ export default {
     if (path === "/stream/audio/youtube")
       return handleYoutube(request, env, ctx);
     if (path === "/")
-      return new Response("LiventCord media worker is working!");
+      return new Response("YukiCord media worker is working!");
     if (path === "/api/v1/proxy/metadata" && request.method === "POST")
       return handleMetadata(request, env);
     if (path.startsWith("/api/v1/proxy/media"))
@@ -79,7 +79,7 @@ export default {
     };
 
     async function fetchFromOrigin(type: string, id: string, version?: string) {
-      const cacheKey = `https://cache.liventcord/${type}_${id}_${version ?? "latest"}`;
+      const cacheKey = `https://cache.yukicord/${type}_${id}_${version ?? "latest"}`;
       const cacheUrl = new URL(cacheKey);
 
       const rangeHeader = request.headers.get("Range") || undefined;

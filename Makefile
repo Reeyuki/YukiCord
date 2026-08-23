@@ -22,7 +22,7 @@ ifeq ($(OS),Linux)
 		echo "tmux not found, skipping Redis"; \
 	fi
 	@if [ -n "$(TERMINAL)" ]; then \
-		$(TERMINAL) -- bash -c "dotnet watch --project ./server/LiventCord run; exec bash" & \
+		$(TERMINAL) -- bash -c "dotnet watch --project ./server/YukiCord run; exec bash" & \
 		$(TERMINAL) -- bash -c "cd ./server/ws-api && go run .; exec bash" & \
 		$(TERMINAL) -- bash -c "pnpm --prefix ./web run dev; exec bash" & \
 		$(TERMINAL) -- bash -c "cd ./server/media-api && go run .; exec bash" & \
@@ -31,7 +31,7 @@ ifeq ($(OS),Linux)
 	fi
 endif
 ifeq ($(OS),Windows_NT)
-	start cmd /k "dotnet watch --project .\server\LiventCord run"
+	start cmd /k "dotnet watch --project .\server\YukiCord run"
 	start cmd /k "cd .\server\ws-api && go run ."
 	start cmd /k "pnpm --prefix .\web run dev"
 	start cmd /k "cd .\server\media-api && go run ."

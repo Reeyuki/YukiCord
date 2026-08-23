@@ -19,7 +19,7 @@ Logs hits made to the landing page.
 ### media-api
 
 1. Edit the configuration inside `wrangler.toml`.
-   - `LIVENTCORD_SERVER_URL` — URL of liventcord netcore server.
+   - `YUKICORD_SERVER_URL` — URL of yukicord netcore server.
    - `ADMIN_PASSWORD` — token used for authenticating with media API servers.
    - `MEDIA_API_SERVERS` — comma-separated list of media API server URLs.
      - See [How to set up media api server](run_media_api_server.md) for full setup.
@@ -37,7 +37,7 @@ compatibility_flags = ["nodejs_compat"]
 [vars]
 ADMIN_PASSWORD = "YOUR_ADMIN_PASSWORD"
 MEDIA_API_SERVERS = "https://proxyserver1.com,https://proxyserver2.com"
-LIVENTCORD_SERVER_URL = "https://your-liventcord-url.com"
+YUKICORD_SERVER_URL = "https://your-yukicord-url.com"
 ```
 
 To deploy:

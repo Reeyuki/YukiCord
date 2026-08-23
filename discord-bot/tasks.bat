@@ -3,7 +3,7 @@ setlocal
 
 set "VENV=venv\Scripts\activate"
 set "PYTHON=python"
-set "API_URL=https://liventcord.koyeb.app"
+set "API_URL=https://yukicord.koyeb.app"
 
 if "%1"=="run" goto run
 if "%1"=="lint" goto lint
@@ -36,8 +36,8 @@ cd src
 openapi-python-client generate --url %API_URL%/swagger/v1/swagger.json --overwrite
 cd ..
 %PYTHON% src\patch_instance_package.py
-pip uninstall livent-cord-client -y
-pip install src\livent-cord-client
+pip uninstall yuki-cord-client -y
+pip install src\yuki-cord-client
 goto end
 
 :setup

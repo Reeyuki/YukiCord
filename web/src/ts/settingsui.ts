@@ -202,7 +202,7 @@ const getGuildSettingsConfig = () => {
   const noodle = `
   <img
     style="width: 100%; max-width: 500px;"
-    src="https://raw.githubusercontent.com/liventcord/LiventCordOld/refs/heads/main/static/404_files/noodle.gif"
+    src="https://raw.githubusercontent.com/yukicord/YukiCordOld/refs/heads/main/static/404_files/noodle.gif"
   />
 `;
 
@@ -630,15 +630,17 @@ function buildInviteRow(
   });
 
   idCell.addEventListener("click", () => {
-    navigator.clipboard.writeText(invite.inviteId ? generateInviteLink(invite.inviteId) : "").then(() => {
-      const originalText = idCell.textContent;
-      idCell.textContent = "Copied!";
-      idCell.classList.add("invite-row__id--copied");
-      setTimeout(() => {
-        idCell.textContent = originalText;
-        idCell.classList.remove("invite-row__id--copied");
-      }, 1500);
-    });
+    navigator.clipboard
+      .writeText(invite.inviteId ? generateInviteLink(invite.inviteId) : "")
+      .then(() => {
+        const originalText = idCell.textContent;
+        idCell.textContent = "Copied!";
+        idCell.classList.add("invite-row__id--copied");
+        setTimeout(() => {
+          idCell.textContent = originalText;
+          idCell.classList.remove("invite-row__id--copied");
+        }, 1500);
+      });
   });
 
   const usagesCell = createEl("span", {

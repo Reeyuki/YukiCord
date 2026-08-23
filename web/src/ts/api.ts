@@ -367,7 +367,7 @@ class ApiClient {
     return method;
   }
   getGitUrl() {
-    return "https://raw.githubusercontent.com/liventcord/LiventCord/main";
+    return "https://raw.githubusercontent.com/yukicord/YukiCord/main";
   }
   getBackendHostname(): string | null {
     const url = this.getBackendUrl();

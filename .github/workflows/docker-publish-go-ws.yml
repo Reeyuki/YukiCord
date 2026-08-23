@@ -31,6 +31,6 @@ jobs:
           context: server/
           file: server/ws-api/Dockerfile
           push: true
-          tags: thelp281/liventcord-ws-api:latest
-          cache-from: type=registry,ref=thelp281/liventcord-ws-api:cache
-          cache-to: type=registry,ref=thelp281/liventcord-ws-api:cache,mode=max
+          tags: thelp281/yukicord-ws-api:latest
+          cache-from: type=registry,ref=thelp281/yukicord-ws-api:cache
+          cache-to: type=registry,ref=thelp281/yukicord-ws-api:cache,mode=max

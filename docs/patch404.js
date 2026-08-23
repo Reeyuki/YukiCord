@@ -4,7 +4,7 @@
 // Injects this script inside react to redirect to app from docusaurus 404 page
 
 // const fullPath = window.location.pathname + window.location.search + window.location.hash;
-// window.location.href = "https://liventcord.github.io" + "/LiventCord/app?page=" + encodeURIComponent(fullPath);
+// window.location.href = "https://yukicord.github.io" + "/YukiCord/app?page=" + encodeURIComponent(fullPath);
 
 
 
@@ -23,7 +23,7 @@ import React, { useEffect } from 'react';
 export default function NotFoundContent({ className }) {
   useEffect(() => {
     const fullPath = window.location.pathname + window.location.hash;
-    window.location.href = "https://liventcord.github.io/LiventCord/app#" + encodeURIComponent(fullPath);
+    window.location.href = "https://yukicord.github.io/YukiCord/app#" + encodeURIComponent(fullPath);
   }, []);
   
   return null;

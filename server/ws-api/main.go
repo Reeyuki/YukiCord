@@ -7,7 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
-	"github.com/liventcord/liventcord/server/telemetry"
+	"github.com/yukicord/yukicord/server/telemetry"
 )
 
 func main() {

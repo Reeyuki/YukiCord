@@ -39,7 +39,7 @@ button {
 .guilds-list
   li
   img:not(
-    [src="https://liventcord.github.io/LiventCord/app/images/icons/icon.webp"]
+    [src="https://yukicord.github.io/YukiCord/app/images/icons/icon.webp"]
   ):hover {
   border-radius: 0px;
 }

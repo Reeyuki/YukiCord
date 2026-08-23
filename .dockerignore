@@ -5,7 +5,7 @@ obj/
 .gitignore
 *.log
 Dockerfile
-server/LiventCord/Properties/*
+server/YukiCord/Properties/*
 web/node_modules/*
 web/output/*
 web/cypress/*

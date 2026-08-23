@@ -1,0 +1,29 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "Microsoft.EntityFrameworkCore": "Error",
+      "Microsoft.EntityFrameworkCore.Database.Command": "Error"
+    }
+  },
+  "AllowedHosts": "*",
+  "AppSettings": {
+    "DatabaseType": "sqlite",
+    "RemoteConnection": "Host=localhost;Port=5432;Username=myuser;Password=mypassword;Database=mydatabase;",
+    "SqlitePath": "Data/yukicord.db",
+    "SqliteCachePath": "Data/yukicord_cache.db",
+    "MinPoolSize": "1",
+    "MaxPoolSize": "3",
+    "Host": "0.0.0.0",
+    "Port": "5005",
+    "FrontendUrl": "http://localhost:3000",
+    "MediaWorkerUrl": "",
+    "mediaApiUrl": "http://localhost:5000",
+    "MaxAvatarSize": "3",
+    "MaxAttachmentsSize": "30",
+    "EnableMetadataIndexing": true,
+    "MetadataDomainLimit": "100",
+    "JwtKey": "YourSuperSecretKeyHereThatShouldBeAtLeast32BytesLong",
+    "AccessTokenExpiryDays": 30
+  }
+}

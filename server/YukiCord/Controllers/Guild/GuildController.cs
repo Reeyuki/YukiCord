@@ -1,0 +1,232 @@
+using System.ComponentModel.DataAnnotations;
+using YukiCord.Helpers;
+using YukiCord.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace YukiCord.Controllers
+{
+    [Route("/api/v1/guilds")]
+    [ApiController]
+    [Authorize]
+    public class GuildController : BaseController
+    {
+        private string DEFAULT_CHANNEL_NAME = "general";
+        private readonly AppDbContext _dbContext;
+        private readonly FileController _imageController;
+        private readonly MembersController _membersController;
+        private readonly PermissionsController _permissionsController;
+        private readonly IAppLogger<GuildController> _logger;
+        private readonly RedisEventEmitter _redisEventEmitter;
+        private readonly ICacheService _cacheService;
+        public GuildController(
+            AppDbContext dbContext,
+            FileController uploadController,
+            MembersController membersController,
+            PermissionsController permissionsController,
+            IAppLogger<GuildController> logger,
+            RedisEventEmitter redisEventEmitter,
+            ICacheService cacheService
+        )
+        {
+            _dbContext = dbContext;
+            _imageController = uploadController;
+            _permissionsController = permissionsController;
+            _membersController = membersController;
+            _logger = logger;
+            _redisEventEmitter = redisEventEmitter;
+            _cacheService = cacheService;
+        }
+
+        [HttpGet("")]
+        public async Task<IActionResult> HandleGetGuilds()
+        {
+            var guilds = await _membersController.GetUserGuilds(UserId!) ?? new List<GuildDto>();
+            return Ok(guilds);
+        }
+
+        [HttpPatch("{guildId}")]
+        public async Task<IActionResult> ChangeGuildName(
+            [FromRoute][IdLengthValidation] string guildId,
+            [FromBody] ChangeGuildNameRequest request
+        )
+        {
+            var guild = await _dbContext.Guilds.FindAsync(guildId);
+            if (guild == null)
+                return NotFound();
+            string userId = UserId!;
+            if (!await _permissionsController.IsUserAdmin(userId, guildId))
+                return StatusCode(StatusCodes.Status403Forbidden);
+
+            guild.GuildName = request.GuildName;
+            await _dbContext.SaveChangesAsync();
+            var payload = new { guildId, request.GuildName };
+            await _redisEventEmitter.EmitToGuild(EventType.UPDATE_GUILD_NAME, payload, guildId);
+            await _redisEventEmitter.EmitGuildMembersToRedis(guildId);
+            await _membersController.InvalidateGuildMemberCaches(userId, guildId);
+
+            return Ok(new { guildId, request.GuildName });
+        }
+
+        [NonAction]
+        public async Task<Guild?> CreateGuild(
+            string ownerId,
+            string guildName,
+            string rootChannel,
+            string guildId,
+            bool? isPublic = false
+        )
+        {
+            var guild = new Guild(guildId, ownerId, guildName, rootChannel, null, false, isPublic ?? false);
+
+            guild.Channels.Add(
+                new Channel
+                {
+                    ChannelId = rootChannel,
+                    GuildId = guildId,
+                    ChannelName = DEFAULT_CHANNEL_NAME,
+                    ChannelDescription = "",
+                    IsPrivate = false,
+                    IsTextChannel = true,
+                    Order = 0,
+                }
+            );
+
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == ownerId);
+            if (user == null)
+            {
+                _logger.LogError("User not found when creating guild: " + ownerId);
+                return null;
+            }
+
+
+            guild.GuildMembers.Add(
+                new GuildMember
+                {
+                    MemberId = ownerId,
+                    GuildId = guildId,
+                    Guild = guild,
+                    User = user,
+                }
+            );
+
+            _dbContext.Guilds.Add(guild);
+
+            await _permissionsController.AddPermissions(guildId, ownerId, PermissionFlags.All);
+
+            return guild;
+        }
+
+        private GuildDto MapToGuildDto(Guild guild)
+        {
+            return new GuildDto
+            {
+                GuildId = guild.GuildId,
+                OwnerId = guild.OwnerId,
+                GuildName = guild.GuildName,
+                RootChannel = guild.RootChannel,
+                Region = guild.Region,
+                IsGuildUploadedImg = guild.IsGuildUploadedImg,
+                GuildMembers = guild.GuildMembers.Select(gu => gu.MemberId).ToList(),
+            };
+        }
+
+        [HttpPost("")]
+        public async Task<IActionResult> CreateGuildEndpoint([FromForm] CreateGuildRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var userId = UserId!;
+            string rootChannel = Utils.CreateRandomId();
+            string guildId = Utils.CreateRandomId();
+
+            var newGuild = await CreateGuild(userId, request.GuildName, rootChannel, guildId, request.IsPublic);
+            if (newGuild == null)
+                return Problem("Guild creation failed");
+
+            string? guildVersion = null;
+            if (request.Photo != null)
+            {
+                guildVersion = await _imageController.UploadImageOnGuildCreation(request.Photo, userId, guildId);
+                if (guildVersion == null)
+                    _logger.LogWarning("Guild image upload failed for guildId: {GuildId}", guildId);
+            }
+
+            var guild = MapToGuildDto(newGuild);
+            guild.GuildVersion = guildVersion;
+            _cacheService.InvalidateCache(UserId!);
+
+            var permissions = await _permissionsController.GetPermissionsMapForUser(userId);
+
+            return StatusCode(201, new { guild, permissions });
+        }
+
+        [HttpDelete("{guildId}")]
+        public async Task<IActionResult> DeleteGuildEndpoint(
+            [FromRoute][IdLengthValidation] string guildId
+        )
+        {
+            try
+            {
+                var guild = await _dbContext.Guilds.FindAsync(guildId);
+                if (guild == null)
+                    return NotFound();
+
+                string userId = UserId!;
+                if (!await _permissionsController.IsUserAdmin(userId, guildId))
+                    return StatusCode(StatusCodes.Status403Forbidden);
+
+                var messages = await _dbContext
+                    .Messages.Where(m =>
+                        _dbContext.Channels.Any(c =>
+                            c.GuildId == guildId && c.ChannelId == m.ChannelId
+                        )
+                    )
+                    .ToListAsync();
+
+                _imageController.DeleteAttachmentFilesAsync(messages);
+
+                _dbContext.Guilds.Remove(guild);
+
+                try
+                {
+                    await _dbContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!await _dbContext.Guilds.AnyAsync(g => g.GuildId == guildId))
+                        return NotFound();
+
+                    throw;
+                }
+
+                await _membersController.InvalidateGuildMemberCaches(userId, guildId);
+                return Ok(new { guildId });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new { message = "An error occurred while deleting the guild." }
+                );
+            }
+        }
+    }
+}
+
+public class CreateGuildRequest
+{
+    [MaxLength(32)]
+    public required string GuildName { get; set; }
+    public bool? IsPublic { get; set; }
+    public IFormFile? Photo { get; set; }
+}
+
+public class ChangeGuildNameRequest
+{
+    [MaxLength(32)]
+    public required string GuildName { get; set; }
+}

@@ -131,8 +131,7 @@ function extractUsers(): UserInfo[] {
 
   if (isOnGuild) {
     const guildMembers = cacheInterface.getMembers(currentGuildId) as
-      | Member[]
-      | undefined;
+      Member[] | undefined;
     if (!guildMembers) return results;
 
     for (const member of guildMembers) {
