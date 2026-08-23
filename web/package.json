@@ -25,7 +25,7 @@
     "canvas-confetti": "^1.9.4",
     "croppie": "^2.6.5",
     "dompurify": "^3.4.14",
-    "file-type": "^20.5.0",
+    "file-type": "^22.0.2",
     "vue": "^3.5.41",
     "vuex": "^4.1.0"
   },
@@ -58,7 +58,7 @@
     "vue-tsc": "^2.2.12"
   },
   "optionalDependencies": {
-    "cypress": "^14.5.4"
+    "cypress": "^15.21.0"
   },
   "packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
 }
